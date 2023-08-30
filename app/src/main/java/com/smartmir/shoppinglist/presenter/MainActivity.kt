@@ -1,7 +1,8 @@
-package com.smartmir.shoppinglist
+package com.smartmir.shoppinglist.presenter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.smartmir.shoppinglist.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
