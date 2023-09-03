@@ -7,6 +7,9 @@ android {
     namespace 'com.smartmir.shoppinglist'
     compileSdk 34
 
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId "com.smartmir.shoppinglist"
         minSdk 21
