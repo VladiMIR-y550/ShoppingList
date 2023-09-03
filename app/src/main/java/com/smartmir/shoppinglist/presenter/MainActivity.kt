@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         shopList.map { item ->
             val view = getShopItemView(item)
             binding.llShopList.addView(view)
+            setupLongClick(view) {
+                viewModel.changeEnabledShopItem(item)
+            }
         }
     }
 
@@ -47,6 +50,13 @@ class MainActivity : AppCompatActivity() {
             itemView.tvNameItem.text = item.name
             itemView.tvCount.text = item.count.toString()
             itemView.root
+        }
+    }
+
+    private fun setupLongClick(view: View, doSomeWork: () -> Unit) {
+        view.setOnLongClickListener {
+            doSomeWork()
+            true
         }
     }
 }

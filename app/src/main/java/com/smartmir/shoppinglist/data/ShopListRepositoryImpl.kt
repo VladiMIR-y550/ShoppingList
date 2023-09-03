@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.smartmir.shoppinglist.domain.ShopItem
 import com.smartmir.shoppinglist.domain.ShopListRepository
 
-object ShopListRepositoryImpl: ShopListRepository {
-    private val shopList = mutableListOf<ShopItem>()
-    private val shopListLiveData= MutableLiveData<List<ShopItem>>()
+object ShopListRepositoryImpl : ShopListRepository {
+    private val shopList = sortedSetOf<ShopItem>({ p0, p1 ->
+        p0.id.compareTo(p1.id)
+    })
+    private val shopListLiveData = MutableLiveData<List<ShopItem>>()
     private var autoIncrementId = 0
 
     init {
@@ -15,7 +17,7 @@ object ShopListRepositoryImpl: ShopListRepository {
             addShopItem(
                 ShopItem(
                     name = "Name $i",
-                    count = 1,
+                    count = i,
                     enabled = true
                 )
             )
