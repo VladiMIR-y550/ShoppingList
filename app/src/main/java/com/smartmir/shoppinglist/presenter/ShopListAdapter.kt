@@ -1,8 +1,8 @@
 package com.smartmir.shoppinglist.presenter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.smartmir.shoppinglist.databinding.ItemShopDisabledBinding
 import com.smartmir.shoppinglist.databinding.ItemShopEnabledBinding
@@ -15,10 +15,11 @@ class ShopListAdapter(
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     var items = listOf<ShopItem>()
-        @SuppressLint("NotifyDataSetChanged")
         set(value) {
+            val callback = ShopListDiffCallback(newItems = value, oldItems = items)
+            val diffResult = DiffUtil.calculateDiff(callback)
+            diffResult.dispatchUpdatesTo(this)
             field = value
-            notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {

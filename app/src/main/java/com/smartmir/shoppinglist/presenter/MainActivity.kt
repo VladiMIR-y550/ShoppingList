@@ -30,9 +30,7 @@ class MainActivity : AppCompatActivity() {
         setupView()
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.shopList.observe(this) { items ->
-            binding.rvShopList.post {
-                adapter.items = items
-            }
+            adapter.items = items
         }
     }
 
