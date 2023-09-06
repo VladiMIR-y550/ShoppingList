@@ -1,9 +1,8 @@
 package com.smartmir.shoppinglist.presenter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.smartmir.shoppinglist.databinding.ItemShopDisabledBinding
 import com.smartmir.shoppinglist.databinding.ItemShopEnabledBinding
 import com.smartmir.shoppinglist.domain.ShopItem
@@ -12,14 +11,7 @@ import com.smartmir.shoppinglist.presenter.base.BaseViewHolder
 class ShopListAdapter(
     private val onShopItemLongClickListener: ((shopItem: ShopItem) -> Unit)? = null,
     private val onShopItemClickListener: ((shopItem: ShopItem) -> Unit)? = null,
-) : RecyclerView.Adapter<BaseViewHolder>() {
-
-    var items = listOf<ShopItem>()
-        @SuppressLint("NotifyDataSetChanged")
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+) : ListAdapter<ShopItem, BaseViewHolder>(ShopItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -49,7 +41,7 @@ class ShopListAdapter(
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        val currentShopItem = items[position]
+        val currentShopItem = getItem(position)
         holder.onBind(currentShopItem)
         holder.itemView.setOnLongClickListener {
             onShopItemLongClickListener?.invoke(currentShopItem)
@@ -60,33 +52,11 @@ class ShopListAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
     override fun getItemViewType(position: Int): Int {
-        return if (items[position].enabled) {
+        return if (getItem(position).enabled) {
             VIEW_TYPE_ENABLED
         } else {
             VIEW_TYPE_DISABLE
-        }
-    }
-
-    class ItemEnabledVewHolder(private val binding: ItemShopEnabledBinding) :
-        BaseViewHolder(binding.root) {
-
-        override fun onBind(shopItem: ShopItem) {
-            binding.tvNameItem.text = shopItem.name
-            binding.tvCount.text = shopItem.count.toString()
-        }
-    }
-
-    class ItemDisabledViewHolder(private val binding: ItemShopDisabledBinding) :
-        BaseViewHolder(binding.root) {
-
-        override fun onBind(shopItem: ShopItem) {
-            binding.tvNameItem.text = shopItem.name
-            binding.tvCount.text = shopItem.count.toString()
         }
     }
 

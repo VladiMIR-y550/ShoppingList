@@ -27,16 +27,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initialBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupView()
+        setupRecyclerView()
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.shopList.observe(this) { items ->
-            binding.rvShopList.post {
-                adapter.items = items
-            }
+            adapter.submitList(items)
         }
     }
 
-    private fun setupView() {
+    private fun setupRecyclerView() {
         binding.rvShopList.adapter = adapter
         itemTouchHelper.attachToRecyclerView(binding.rvShopList)
     }
@@ -59,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = adapter.items[viewHolder.adapterPosition]
+                val item = adapter.currentList[viewHolder.adapterPosition]
                 onSwipeLeftOrRight(item)
             }
         }
