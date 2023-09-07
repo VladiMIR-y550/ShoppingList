@@ -43,7 +43,6 @@ class ShopItemViewModel : ViewModel() {
         val count = parseCount(inputCount)
         val isFieldsValid = validateInput(name, count)
         if (isFieldsValid) {
-
             val shopItem = currentShopItem.value
             shopItem?.let {
                 val item = it.copy(name = name, count = count)
