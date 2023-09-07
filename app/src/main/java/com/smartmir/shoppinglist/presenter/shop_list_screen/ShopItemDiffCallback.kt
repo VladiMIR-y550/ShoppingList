@@ -1,4 +1,4 @@
-package com.smartmir.shoppinglist.presenter
+package com.smartmir.shoppinglist.presenter.shop_list_screen
 
 import androidx.recyclerview.widget.DiffUtil
 import com.smartmir.shoppinglist.domain.ShopItem

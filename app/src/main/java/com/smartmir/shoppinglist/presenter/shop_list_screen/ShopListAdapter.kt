@@ -1,4 +1,4 @@
-package com.smartmir.shoppinglist.presenter
+package com.smartmir.shoppinglist.presenter.shop_list_screen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.smartmir.shoppinglist.presenter
+package com.smartmir.shoppinglist.presenter.shop_list_screen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -61,5 +61,10 @@ class MainActivity : AppCompatActivity() {
                 onSwipeLeftOrRight(item)
             }
         }
+    }
+
+    override fun onDestroy() {
+        initialBinding = null
+        super.onDestroy()
     }
 }

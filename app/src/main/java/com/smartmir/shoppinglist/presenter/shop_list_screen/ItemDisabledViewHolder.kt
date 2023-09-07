@@ -1,10 +1,10 @@
-package com.smartmir.shoppinglist.presenter
+package com.smartmir.shoppinglist.presenter.shop_list_screen
 
-import com.smartmir.shoppinglist.databinding.ItemShopEnabledBinding
+import com.smartmir.shoppinglist.databinding.ItemShopDisabledBinding
 import com.smartmir.shoppinglist.domain.ShopItem
 import com.smartmir.shoppinglist.presenter.base.BaseViewHolder
 
-class ItemEnabledVewHolder(private val binding: ItemShopEnabledBinding) :
+class ItemDisabledViewHolder(private val binding: ItemShopDisabledBinding) :
     BaseViewHolder(binding.root) {
 
     override fun onBind(shopItem: ShopItem) {
